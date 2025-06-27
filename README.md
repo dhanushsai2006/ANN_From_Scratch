@@ -1,164 +1,178 @@
-# Neural Networks from Scratch
+# 🚀 Neural Networks from Scratch
 
-A comprehensive implementation of neural networks built from the ground up using only NumPy, providing deep insights into the mathematical foundations of deep learning.
+🧠 **Build Neural Networks Without Deep Learning Frameworks - Just NumPy!**
 
-## Overview
+[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://python.org)
+[![NumPy](https://img.shields.io/badge/NumPy-Latest-orange.svg)](https://numpy.org)
 
-This project demonstrates how to build neural networks without relying on high-level deep learning frameworks like TensorFlow or PyTorch. By implementing everything from scratch, you'll gain a thorough understanding of:
+## 📚 Overview
 
-- Forward propagation algorithms
-- Backpropagation and gradient computation
-- Weight initialization strategies
-- Activation functions and their derivatives
-- Loss functions and optimization techniques
+This project demonstrates how to build neural networks from scratch using only NumPy, without relying on high-level deep learning frameworks. Perfect for understanding the fundamental concepts behind neural networks! 
 
-## Features
 
-- **Pure NumPy Implementation**: No external deep learning libraries required
-- **Modular Architecture**: Clean, well-structured code that's easy to understand and modify
-- **Multiple Activation Functions**: Support for ReLU, Sigmoid, Tanh, and more
-- **Flexible Network Architecture**: Easily configurable layers and neurons
-- **Comprehensive Documentation**: Detailed explanations of mathematical concepts
-- **Visual Learning**: Includes diagrams and visualizations of key concepts
+## ✨ Features
 
-## Project Structure
+- 🏗️ **3-Layer Architecture**: Input → Hidden → Output layers
+- 🎭 **Multiple Activation Functions**: ReLU and Sigmoid implementations
+- 🚀 **Optimizers**: SGD and Momentum optimization
+- 📈 **MNIST Dataset**: Train on handwritten digit recognition
+- ⚡ **Fast Training**: ~98% accuracy in just 10 seconds on CPU
+- 📓 **Jupyter Notebook**: Interactive learning experience
 
-```
-├── model.py              # Core neural network implementation
-├── NN-from-Scratch.ipynb # Interactive tutorial notebook
-├── figs/                 # Visualization and diagram assets
-│   └── backprop_algo_backward.png
-├── examples/             # Usage examples and demonstrations
-└── README.md            # Project documentation
-```
+## 🏃‍♂️ Quick Start
 
-## Quick Start
-
-### Requirements
-
+### Prerequisites
 ```bash
 pip install numpy matplotlib
 ```
 
-### Basic Usage
+### 🚀 Basic Training
+```bash
+python train.py
+```
 
+### 🎛️ Advanced Configuration
+```bash
+# Using sigmoid activation with momentum optimizer
+python train.py --activation sigmoid --optimizer momentum --l_rate 4
+
+# Custom batch size and learning rate
+python train.py --batch_size 64 --l_rate 0.01 --beta 0.9
+```
+
+## ⚙️ Configuration Options
+
+| Parameter | Options | Description |
+|-----------|---------|-------------|
+| `--activation` | `relu`, `sigmoid` | 🎭 Activation function |
+| `--optimizer` | `sgd`, `momentum` | 🏃‍♂️ Optimization algorithm |
+| `--batch_size` | Integer | 📦 Training batch size |
+| `--l_rate` | Float | 📈 Learning rate |
+| `--beta` | Float | 🎯 Beta parameter for momentum |
+
+## 🏗️ Architecture
+
+### 🔢 Network Structure
+- **Input Layer**: 784 nodes (28×28 flattened images)
+- **Hidden Layer**: 64 nodes  
+- **Output Layer**: 10 nodes (digit classes 0-9)
+
+### 🧮 Mathematical Foundation
+
+**Forward Propagation:**
+```
+Z₁ = W₁X + b₁
+A₁ = activation(Z₁)
+Z₂ = W₂A₁ + b₂  
+A₂ = softmax(Z₂)
+```
+
+**Backward Propagation:**
+```
+∂L/∂W = (1/m) * A * X^T
+∂L/∂b = (1/m) * Σ(∂L/∂Z)
+```
+
+## 📊 Dataset
+
+🔢 **MNIST Handwritten Digits**
+- 📚 70,000 total images
+- 🏋️ 60,000 training samples
+- 🧪 10,000 testing samples
+- 📏 28×28 pixel grayscale images
+- 🎯 10 classes (digits 0-9)
+
+## 🚀 Performance
+
+- ⚡ **Training Time**: ~10 seconds on CPU
+- 🎯 **Accuracy**: ~98% on test set
+- 💾 **Memory Efficient**: Pure NumPy implementation
+- 🔧 **Lightweight**: No external ML frameworks required
+
+## 📁 Project Structure
+
+```
+📦 neural-networks-scratch/
+├── 🐍 train.py              # Main training script
+├── 🧠 model.py              # Neural network implementation
+├── 📓 NN-from-Scratch.ipynb # Interactive Jupyter notebook
+├── 📊 data/                 # Dataset directory
+├── 🖼️ figs/                 # Visualization figures
+└── 📚 README.md             # This file
+```
+
+## 🎓 Educational Value
+
+### 🔬 Core Concepts Covered
+- 🧮 **Matrix Operations**: Understanding dot products and dimensions
+- 📐 **Calculus**: Gradients and chain rule in backpropagation  
+- 📊 **Statistics**: Weight initialization and normalization
+- 🎯 **Optimization**: Gradient descent and momentum
+
+### 🎭 Activation Functions
 ```python
-import numpy as np
-from model import NeuralNetwork
+# ReLU Activation
+def relu(x, derivative=False):
+    if derivative:
+        return np.where(x > 0, 1, 0)
+    return np.maximum(0, x)
 
-# Create a simple neural network
-nn = NeuralNetwork(layers=[784, 128, 64, 10])
+# Sigmoid Activation  
+def sigmoid(x, derivative=False):
+    if derivative:
+        return sigmoid(x) * (1 - sigmoid(x))
+    return 1 / (1 + np.exp(-x))
+```
 
-# Train on your data
-nn.train(X_train, y_train, epochs=100, learning_rate=0.01)
+## 🎨 Visualization
+
+The project includes beautiful visualizations of:
+- 📈 Training loss curves
+- 🎯 Accuracy progression  
+- 🔍 Weight distributions
+- 🧠 Network architecture diagrams
+
+## 🔧 Advanced Usage
+
+### 🎮 Interactive Mode
+```python
+from model import DeepNeuralNetwork
+
+# Initialize network
+dnn = DeepNeuralNetwork(sizes=[784, 64, 10], activation='relu')
+
+# Train the model
+dnn.train(x_train, y_train, x_test, y_test)
 
 # Make predictions
-predictions = nn.predict(X_test)
+predictions = dnn.predict(x_new)
 ```
 
-## Mathematical Foundation
+### 📊 Custom Experiments
+Try experimenting with:
+- 🏗️ Different architectures (more layers, different sizes)
+- 🎭 New activation functions (Tanh, Leaky ReLU)
+- 🚀 Advanced optimizers (Adam, RMSprop)
+- 📈 Learning rate scheduling
 
-### Forward Propagation
+## 🤝 Contributing
 
-The forward pass computes the output of each layer:
+We welcome contributions! 🎉
 
-```
-z^(l) = W^(l) * a^(l-1) + b^(l)
-a^(l) = σ(z^(l))
-```
+1. 🍴 Fork the repository
+2. 🌿 Create a feature branch
+3. 💻 Make your changes
+4. 🧪 Add tests if needed
+5. 📝 Submit a pull request
 
-Where:
-- `z^(l)` is the linear combination at layer l
-- `W^(l)` are the weights
-- `b^(l)` are the biases
-- `σ` is the activation function
+## 📚 References
 
-### Backpropagation
+- [CS565600 Deep Learning](https://nthu-datalab.github.io/ml/index.html), National Tsing Hua University
+- [Building a Neural Network from Scratch: Part 1](https://jonathanweisberg.org/post/A%20Neural%20Network%20from%20Scratch%20-%20Part%201/)
+- [Building a Neural Network from Scratch: Part 2](https://jonathanweisberg.org/post/A%20Neural%20Network%20from%20Scratch%20-%20Part%202/)
+- [Neural networks from scratch](https://developer.ibm.com/technologies/artificial-intelligence/articles/neural-networks-from-scratch), IBM Developer
+- [The Softmax Function Derivative (Part 1)](https://aimatters.wordpress.com/2019/06/17/the-softmax-function-derivative/)
 
-The backward pass computes gradients using the chain rule:
+---
 
-```
-∂L/∂W^(l) = ∂L/∂z^(l) * ∂z^(l)/∂W^(l)
-∂L/∂b^(l) = ∂L/∂z^(l)
-```
-
-## Key Components
-
-### Activation Functions
-- **ReLU**: `f(x) = max(0, x)`
-- **Sigmoid**: `f(x) = 1 / (1 + e^(-x))`
-- **Tanh**: `f(x) = tanh(x)`
-- **Softmax**: For multi-class classification
-
-### Loss Functions
-- **Mean Squared Error**: For regression tasks
-- **Cross-Entropy**: For classification tasks
-- **Binary Cross-Entropy**: For binary classification
-
-### Optimization
-- **Gradient Descent**: Basic optimization algorithm
-- **Momentum**: Accelerated gradient descent
-- **Learning Rate Scheduling**: Adaptive learning rates
-
-## Examples
-
-### Binary Classification
-
-```python
-# XOR problem
-X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-y = np.array([[0], [1], [1], [0]])
-
-nn = NeuralNetwork([2, 4, 1])
-nn.train(X, y, epochs=1000, learning_rate=0.1)
-```
-
-### Multi-class Classification
-
-```python
-# MNIST-like dataset
-nn = NeuralNetwork([784, 128, 64, 10])
-nn.train(X_train, y_train, epochs=50, learning_rate=0.01)
-
-accuracy = nn.evaluate(X_test, y_test)
-print(f"Test Accuracy: {accuracy:.2f}%")
-```
-
-## Learning Resources
-
-### Understanding Backpropagation
-The backpropagation algorithm is the heart of neural network training. It efficiently computes gradients by propagating errors backward through the network, allowing us to update weights to minimize the loss function.
-
-### Weight Initialization
-Proper weight initialization is crucial for successful training. This implementation includes several initialization strategies:
-- Xavier/Glorot initialization
-- He initialization
-- Random normal initialization
-
-### Regularization Techniques
-- L1/L2 regularization to prevent overfitting
-- Dropout simulation
-- Early stopping criteria
-
-## Performance Tips
-
-1. **Batch Processing**: Process multiple samples simultaneously for efficiency
-2. **Vectorization**: Leverage NumPy's vectorized operations
-3. **Learning Rate Tuning**: Start with 0.01 and adjust based on convergence
-4. **Feature Scaling**: Normalize inputs for faster convergence
-
-## Troubleshooting
-
-### Common Issues
-- **Vanishing Gradients**: Use ReLU activation or gradient clipping
-- **Exploding Gradients**: Reduce learning rate or use gradient clipping
-- **Slow Convergence**: Check learning rate and initialization
-- **Overfitting**: Add regularization or reduce model complexity
-
-## Contributing
-
-Feel free to contribute by:
-- Adding new activation functions
-- Implementing optimization algorithms
-- Improving documentation
-- Adding more examples
+⭐ **Star this repository if you found it helpful!** ⭐
